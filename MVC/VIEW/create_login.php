@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida---Roberto\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST['nome'];
