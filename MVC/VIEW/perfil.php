@@ -1,7 +1,7 @@
 <?php
 session_start();
-
 require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\CONTROLLER\controller.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     die("Erro: Usuário não autenticado.");
@@ -9,14 +9,16 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $usuario_id = $_SESSION['usuario_id'];
 
-$sql = "SELECT nome, foto_perfil, sobre_mim FROM users WHERE id = :id";
+$sql = "SELECT nome, foto_perfil FROM users WHERE id = :id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':id', $usuario_id);
 $stmt->execute();
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $foto_perfil = !empty($usuario['foto_perfil']) ? 'users/' . $usuario['foto_perfil'] : 'users/foto_padrao.png';
-$sobre_mim_atual = $usuario['sobre_mim'] ?? '';
+
+$controller = new Controller($pdo);
+$dados = $controller->listarQuemSou($usuario_id);
 ?>
 
 <!DOCTYPE html>
@@ -24,64 +26,203 @@ $sobre_mim_atual = $usuario['sobre_mim'] ?? '';
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Usuário</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .area-usuario {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .foto-usuario {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #4A7BFF;
+        }
+
+        .botao-sair {
+            background-color: #4A7BFF;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .botao-sair:hover {
+            background-color: #365edc;
+        }
+
+        main {
+            display: flex;
+            padding: 30px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .sidebar img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 2px solid #4A7BFF;
+        }
+
+        .sidebar button, .sidebar a {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #4A7BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            background-color: #365edc;
+        }
+
+        .content {
+            flex-grow: 1;
+            margin-left: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .content h2 {
+            color: #4A7BFF;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4A7BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        strong {
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <h1>Perfil</h1>
-        <div>
-            <form action="sair.php" method="POST">
-                <button type="submit">Sair</button>
-            </form>
-        </div>
-    </header>
+<header>
+    <h1>Bem-vindo(a), <?= htmlspecialchars($usuario['nome']) ?>!</h1>
+    <div class="area-usuario">
+        <img src="<?= htmlspecialchars($foto_perfil) ?>" alt="Foto de Perfil" class="foto-usuario">
+        <form action="sair.php" method="POST">
+            <button type="submit" class="botao-sair">Sair</button>
+        </form>
+    </div>
+</header>
 
-    <main>
-        <div>
-            <h1><?= htmlspecialchars($usuario['nome']) ?></h1>
-            <img src="<?= htmlspecialchars($foto_perfil) ?>" alt="Foto de Perfil" width="150" height="150"><br><br>
+<main>
+    <div class="sidebar">
+        <img src="<?= htmlspecialchars($foto_perfil) ?>" alt="Foto de Perfil"><br>
 
-            <!-- FORMULÁRIO DE FOTO COM METHOD E ACTION -->
-            <form id="formFoto" action="atualizar_foto.php" method="POST" enctype="multipart/form-data">
-                <input type="file" id="arquivo" name="arquivo" accept="image/*" required>
-                <label for="arquivo">Escolher arquivo</label><br><br>
-                <button type="submit">Atualizar Foto</button>
-            </form>
-        </div>
+        <form id="formFoto" action="atualizar_foto.php" method="POST" enctype="multipart/form-data">
+            <input type="file" id="arquivo" name="arquivo" accept="image/*" required><br><br>
+            <button type="submit">Atualizar Foto</button>
+        </form>
 
+        <hr><br>
 
-        <div>
-            <h2>Sobre você</h2>
-            <?= nl2br(htmlspecialchars($sobre_mim_atual ?: 'Você ainda não escreveu nada sobre si mesmo.')) ?>
-        </div>
-    </main>
+        <a href="planejamento_futuro.php">Planejamento do Futuro</a>
+        <a href="ver_planejamento.php">Ver Meu Planejamento</a>
+        <a href="plano_acao.php">Plano de Ação</a>
+        <a href="ver_plano_acao.php">Ver Meu Plano de Ação</a>
+        <a href="quiz_inteligencia.php">Quiz Inteligência</a>
+        <a href="resultado_quiz_inteligencia.php">Resultado Quiz Inteligência</a>
+        <a href="quiz_personalidade.php">Quiz Personalidade</a>
+        <a href="resultado_quiz_personalidade.php">Resultado Quiz Personalidade</a>
+        <a href="sobre_mim.php">Sobre Mim</a>
+        <a href="quem_sou.php">Quem Sou</a>
+        <a href="ver_quem_sou.php">Ver Quem Sou</a>
+    </div>
 
-    <script>
-        const formFoto = document.getElementById('formFoto');
+    <div class="content">
+        <h2>Meus Dados - Quem Sou Eu</h2>
 
-        formFoto.addEventListener('submit', function (e) {
-            e.preventDefault();
+        <?php if ($dados): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categorias</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($dados as $campo => $valor): ?>
+                        <tr>
+                            <td><strong><?= ucwords(str_replace('_', ' ', $campo)) ?>:</strong></td>
+                            <td><?= htmlspecialchars($valor) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>Nenhum dado encontrado.</p>
+        <?php endif; ?>
+    </div>
+</main>
 
-            const formData = new FormData(formFoto);
-
-            fetch('upload_foto.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data); // Para depuração
-                if (data.status === 'sucesso') {
-                    const novaFoto = 'users/' + data.arquivo;
-                    document.querySelector('img').src = novaFoto + '?t=' + new Date().getTime();
-                } else {
-                    alert(data.mensagem);
-                }
-            })
-            .catch(() => {
-                alert('Erro ao enviar a foto.');
-            });
-        });
-    </script>
 </body>
 </html>

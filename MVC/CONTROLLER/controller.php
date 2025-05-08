@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida---Roberto\MVC\Model.php\Model.php';
+require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\MODEL\model.php';
 
 class Controller
 {
