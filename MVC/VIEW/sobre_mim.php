@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\VIEW\upload_foto.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     die("Erro: Usuário não autenticado.");
