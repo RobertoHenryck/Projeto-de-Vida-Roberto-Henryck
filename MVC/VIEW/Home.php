@@ -24,7 +24,7 @@ $foto_perfil = !empty($usuario['foto_perfil']) ? 'users/' . $usuario['foto_perfi
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Principal</title>
-    <link rel="icon" type="image/png" href="logo para web.png">
+    <link rel="icon" type="image/png" href="../logo para web.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
