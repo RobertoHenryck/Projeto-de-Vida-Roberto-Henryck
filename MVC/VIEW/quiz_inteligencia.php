@@ -56,64 +56,123 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Teste de Múltiplas Inteligências</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .pergunta {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pergunta p {
+            font-weight: 500;
+            color: #333;
+        }
+
+        label {
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            margin-right: 6px;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #4A7BFF;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #365ee6;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            label {
+                display: block;
+                margin: 8px 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<h2>Teste de Múltiplas Inteligências</h2>
-<form method="POST">
+<div class="container">
+    <h2>Teste de Múltiplas Inteligências</h2>
+    <form method="POST">
+        <?php
+        $perguntas = [
+            "Eu consigo identificar melodias e ritmos facilmente.",
+            "Eu sou capaz de aprender novas músicas ou canções rapidamente.",
+            "Eu gosto de resolver quebra-cabeças e problemas de lógica.",
+            "Eu consigo perceber padrões em dados ou números rapidamente.",
+            "Eu me sinto mais confortável quando estou em movimento.",
+            "Eu tenho facilidade para aprender novas habilidades físicas ou esportivas.",
+            "Eu sou bom em me expressar de forma clara, seja falando ou escrevendo.",
+            "Eu gosto de escrever ou criar histórias, poesias ou textos criativos.",
+            "Eu me dou bem trabalhando em equipe e gosto de ajudar os outros.",
+            "Eu sou bom em perceber as necessidades e sentimentos dos outros.",
+            "Eu frequentemente reflito sobre minhas próprias emoções e ações.",
+            "Eu sei reconhecer meus pontos fortes e áreas em que preciso melhorar.",
+            "Eu me interesso por estudar plantas, animais ou o meio ambiente.",
+            "Eu gosto de observar a natureza e aprender como ela funciona.",
+            "Eu sou bom em reconhecer as emoções que estou sentindo em momentos de estresse.",
+            "Eu consigo lidar com situações emocionais intensas sem perder o controle."
+        ];
 
-<?php
-$perguntas = [
-    // Musical
-    "Eu consigo identificar melodias e ritmos facilmente.",
-    "Eu sou capaz de aprender novas músicas ou canções rapidamente.",
+        $opcoes = [
+            "A" => "Concordo",
+            "B" => "Discordo"
+        ];
 
-    // Lógico-Matemática
-    "Eu gosto de resolver quebra-cabeças e problemas de lógica.",
-    "Eu consigo perceber padrões em dados ou números rapidamente.",
-
-    // Corporal-Cinestésica
-    "Eu me sinto mais confortável quando estou em movimento.",
-    "Eu tenho facilidade para aprender novas habilidades físicas ou esportivas.",
-
-    // Linguística
-    "Eu sou bom em me expressar de forma clara, seja falando ou escrevendo.",
-    "Eu gosto de escrever ou criar histórias, poesias ou textos criativos.",
-
-    // Interpessoal
-    "Eu me dou bem trabalhando em equipe e gosto de ajudar os outros.",
-    "Eu sou bom em perceber as necessidades e sentimentos dos outros.",
-
-    // Intrapessoal
-    "Eu frequentemente reflito sobre minhas próprias emoções e ações.",
-    "Eu sei reconhecer meus pontos fortes e áreas em que preciso melhorar.",
-
-    // Naturalista
-    "Eu me interesso por estudar plantas, animais ou o meio ambiente.",
-    "Eu gosto de observar a natureza e aprender como ela funciona.",
-
-    // Emocional
-    "Eu sou bom em reconhecer as emoções que estou sentindo em momentos de estresse.",
-    "Eu consigo lidar com situações emocionais intensas sem perder o controle."
-];
-
-$opcoes = [
-    "A" => "Concordo",
-    "B" => "Discordo"
-];
-
-foreach ($perguntas as $index => $pergunta) {
-    echo "<p>" . ($index + 1) . ". " . $pergunta . "</p>";  
-    foreach ($opcoes as $key => $value) {
-        echo "<input type='radio' name='q" . ($index + 1) . "' value='$key' required> $value ";
-    }
-    echo "<br><br>";
-}
-?>
-
-<br>
-<button type="submit">Enviar</button>
-</form>
+        foreach ($perguntas as $index => $pergunta) {
+            echo "<div class='pergunta'>";
+            echo "<p>" . ($index + 1) . ". $pergunta</p>";
+            foreach ($opcoes as $key => $label) {
+                echo "<label><input type='radio' name='q" . ($index + 1) . "' value='$key' required> $label</label>";
+            }
+            echo "</div>";
+        }
+        ?>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
 
 </body>
 </html>

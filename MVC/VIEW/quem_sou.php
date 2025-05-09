@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<script>alert('Erro ao salvar os dados!');</script>";
     }
 
-    header('Location: lista_quem_sou.php');
+    header('Location: perfil.php');
 }
 ?>
 <!DOCTYPE html>
@@ -46,6 +46,75 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Quem Sou Eu</title>
+    <head>
+    <meta charset="UTF-8">
+    <title>Quem Sou Eu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4A7BFF;
+            margin-top: 30px;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        textarea,
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            resize: vertical;
+            background-color: #fdfdfd;
+        }
+
+        input[type="text"]::placeholder {
+            color: #999;
+        }
+
+        button {
+            display: block;
+            margin: 30px auto 0;
+            padding: 12px 30px;
+            background-color: #4A7BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3a65e0;
+        }
+    </style>
+</head>
+
 </head>
 <body>
     <h2>Quem Sou Eu?</h2>

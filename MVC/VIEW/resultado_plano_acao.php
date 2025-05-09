@@ -28,12 +28,87 @@ foreach ($areas as $area) {
 <head>
     <meta charset="UTF-8">
     <title>Plano de Ação - Listagem</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        thead {
+            background-color: #4A7BFF;
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #ecf3fa;
+        }
+
+        p {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .actions a {
+            display: inline-block;
+            background-color: #4A7BFF;
+            color: white;
+            padding: 10px 18px;
+            margin: 5px;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .actions a:hover {
+            background-color: #375bd8;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Planos de Ação</h1>
+<div class="container">
+    <h1>Seus Planos de Ação</h1>
 
-    <table border="1" cellpadding="8" cellspacing="0">
+    <table>
         <thead>
             <tr>
                 <th>Área</th>
@@ -48,21 +123,25 @@ foreach ($areas as $area) {
             <?php foreach ($areas as $area): ?>
                 <?php $area_underscore = str_replace(' ', '_', $area); ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($area); ?></td>
-                    <td><?php echo htmlspecialchars($planos_acao[$area_underscore]['descricao'] ?? 'Não informado'); ?></td>
-                    <td><?php echo htmlspecialchars($planos_acao[$area_underscore]['prazo'] ?? 'Não informado'); ?></td>
-                    <td><?php echo htmlspecialchars($planos_acao[$area_underscore]['passo1'] ?? 'Não informado'); ?></td>
-                    <td><?php echo htmlspecialchars($planos_acao[$area_underscore]['passo2'] ?? 'Não informado'); ?></td>
-                    <td><?php echo htmlspecialchars($planos_acao[$area_underscore]['passo3'] ?? 'Não informado'); ?></td>
+                    <td><?= htmlspecialchars($area) ?></td>
+                    <td><?= htmlspecialchars($planos_acao[$area_underscore]['descricao'] ?? 'Não informado') ?></td>
+                    <td><?= htmlspecialchars($planos_acao[$area_underscore]['prazo'] ?? 'Não informado') ?></td>
+                    <td><?= htmlspecialchars($planos_acao[$area_underscore]['passo1'] ?? 'Não informado') ?></td>
+                    <td><?= htmlspecialchars($planos_acao[$area_underscore]['passo2'] ?? 'Não informado') ?></td>
+                    <td><?= htmlspecialchars($planos_acao[$area_underscore]['passo3'] ?? 'Não informado') ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
-    <p>Essa é a lista dos seus planos de ação. Se necessário, você pode editá-los a qualquer momento.</p>
+    <p>Visualize e gerencie seus planos de ação de forma clara e organizada.</p>
 
-    <p><a href="editar_plano_acao.php">Editar Plano de Ação</a></p>
-    <p><a href="perfil.php">Voltar</a></p>
+    <div class="actions">
+        <a href="editar_plano_acao.php">Editar Plano de Ação</a>
+        <a href="perfil.php">Voltar ao Perfil</a>
+    </div>
+</div>
 
 </body>
 </html>
+

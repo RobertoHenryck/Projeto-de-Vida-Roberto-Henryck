@@ -71,6 +71,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste de Personalidade</title>
+    <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f0f2f5;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 30px;
+        color: #2c3e50;
+    }
+
+    form {
+        max-width: 800px;
+        margin: 30px auto;
+        background: #ffffff;
+        padding: 30px 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+        font-weight: 600;
+        margin: 20px 0 10px;
+    }
+
+    input[type="radio"] {
+        margin-right: 8px;
+        transform: scale(1.2);
+    }
+
+    label {
+        display: block;
+        margin: 5px 0;
+        cursor: pointer;
+    }
+
+    button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #4A7BFF;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3A65E0;
+    }
+
+    @media (max-width: 600px) {
+        form {
+            padding: 20px;
+        }
+    }
+</style>
+
+
 </head>
 
 <body>

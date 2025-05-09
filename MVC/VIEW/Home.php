@@ -147,8 +147,8 @@ $foto_perfil = !empty($usuario['foto_perfil']) ? 'users/' . $usuario['foto_perfi
     <main>
         <h2>Escolha uma opção abaixo:</h2>
         <div class="botoes-escolha">
-            <a href="personalidade.php">DESCUBRA SUA PERSONALIDADE</a>
-            <a href="inteligencia.php">DESCUBRA SUA INTELIGÊNCIA</a>
+            <a href="quiz_personalidade.php">DESCUBRA SUA PERSONALIDADE</a>
+            <a href="quiz_inteligencia.php">DESCUBRA SUA INTELIGÊNCIA</a>
         </div>
     </main>
 

@@ -72,6 +72,61 @@ $valores = json_encode(array_values($pontuacao));
     <title>Resultado do Teste</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado do Teste</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: #4A7BFF;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            margin: 10px auto;
+            max-width: 600px;
+        }
+
+        canvas {
+            display: block;
+            margin: 40px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin: 30px auto;
+            background-color: #4A7BFF;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            width: fit-content;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #3a65e0;
+        }
+    </style>
+</head>
+
 <body>
 
     <h2>Seu Resultado</h2>

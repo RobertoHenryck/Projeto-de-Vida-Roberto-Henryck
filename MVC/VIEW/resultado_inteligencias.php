@@ -21,18 +21,58 @@ if (!$testes) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado do Teste de Inteligências</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        #graficoInteligencias {
-            width: 300px;
-            height: 200px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4ff;
+            color: #333;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        select,
+        a,
+        h2 {
+            margin-top: 1rem;
+        }
+
+        canvas#graficoInteligencias {
+            width: 100% !important;
+            max-width: 600px;
+            aspect-ratio: 2 / 1;
+            height: auto !important;
+            margin: 2rem auto;
+            display: block;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        select {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 2rem;
+            text-decoration: none;
+            background-color: #4A7BFF;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
         }
     </style>
 </head>
+
 <body>
     <h2>Selecione um teste anterior:</h2>
     <select id="selecionar_teste">
@@ -44,46 +84,51 @@ if (!$testes) {
 
     <canvas id="graficoInteligencias"></canvas>
 
+    <h2 id="resultado_tipo">Tipo de inteligência:</h2>
+
+    <a href="perfil.php">Voltar</a>
+
     <script>
-        let ctx = document.getElementById('graficoInteligencias').getContext('2d');
-        let myChart = new Chart(ctx, {
+        const ctx = document.getElementById('graficoInteligencias').getContext('2d');
+        const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: [],
                 datasets: [{
                     label: 'Pontuação',
                     data: [],
-                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                    backgroundColor: '#4A7BFF'
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
                 scales: {
-                    y: { beginAtZero: true }
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
                 },
-                animation: {
-                    duration: 500,
-                    easing: 'easeInOutQuad'
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 }
             }
         });
 
-        document.getElementById('selecionar_teste').addEventListener('change', function() {
-            let testeId = this.value;
+        document.getElementById('selecionar_teste').addEventListener('change', function () {
+            const testeId = this.value;
             if (testeId) {
                 fetch('encontrar_resultado.php?id=' + testeId)
                     .then(response => response.json())
                     .then(data => {
                         if (data.resultado) {
-                            // Atualiza os dados do gráfico
                             myChart.data.labels = Object.keys(data.resultado);
                             myChart.data.datasets[0].data = Object.values(data.resultado);
-
-                            // Força o gráfico a ser atualizado
                             myChart.update();
-
-                            // Exibe o tipo de inteligência
                             document.getElementById("resultado_tipo").innerText = "Você é mais: " + data.tipo;
                         }
                     })
@@ -91,8 +136,6 @@ if (!$testes) {
             }
         });
     </script>
-
-    <h2 id="resultado_tipo">Tipo de inteligência:</h2>
-    <a href="perfil.php">Voltar</a>
 </body>
+
 </html>
