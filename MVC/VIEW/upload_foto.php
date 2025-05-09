@@ -1,8 +1,6 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
-
-header('Content-Type: application/json');
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['arquivo'])) {
     $usuario_id = $_SESSION['usuario_id'];
@@ -22,16 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['arquivo'])) {
     $extensoes_permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     $tamanho_maximo = 2 * 1024 * 1024;
 
-    if ($erro !== 0) {
-        echo json_encode(['status' => 'erro', 'mensagem' => 'Erro ao enviar o arquivo.']);
-        exit;
-    }
-    if (!in_array($extensao, $extensoes_permitidas)) {
-        echo json_encode(['status' => 'erro', 'mensagem' => 'Tipo de arquivo inválido.']);
-        exit;
-    }
-    if ($tamanho > $tamanho_maximo) {
-        echo json_encode(['status' => 'erro', 'mensagem' => 'Arquivo muito grande.']);
+    if ($erro !== 0 || !in_array($extensao, $extensoes_permitidas) || $tamanho > $tamanho_maximo) {
+        header("Location: perfil.php?erro=upload");
         exit;
     }
 
@@ -43,14 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['arquivo'])) {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':foto', $foto_nome);
         $stmt->bindParam(':id', $usuario_id);
-
-        if ($stmt->execute()) {
-            echo json_encode(['status' => 'sucesso', 'arquivo' => $foto_nome]);
-        } else {
-            echo json_encode(['status' => 'erro', 'mensagem' => 'Erro ao salvar no banco.']);
-        }
-    } else {
-        echo json_encode(['status' => 'erro', 'mensagem' => 'Erro ao mover o arquivo.']);
+        $stmt->execute();
     }
+
+    // Redireciona de volta para o perfil, sucesso ou não
+    header("Location: perfil.php");
+    exit;
 }
 ?>

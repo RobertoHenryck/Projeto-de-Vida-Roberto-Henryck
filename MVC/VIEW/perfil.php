@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\CONTROLLER\controller.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\CONTROLLER\controller.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     die("Erro: Usuário não autenticado.");
@@ -16,7 +16,6 @@ $stmt->bindParam(':id', $usuario_id, PDO::PARAM_INT);
 $stmt->execute();
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Verificação para evitar erro ao acessar índice de valor booleano
 if (!$usuario) {
     die("Erro: Usuário não encontrado no banco de dados.");
 }
@@ -29,10 +28,10 @@ $dados = $controller->listarQuemSou($usuario_id);
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Usuário</title>
+    <link rel="icon" type="image/png" href="../logo para web.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -179,68 +178,62 @@ $dados = $controller->listarQuemSou($usuario_id);
 
 <body>
 
-    <header>
-        <h1>Bem-vindo(a), <?= htmlspecialchars($usuario['nome']) ?>!</h1>
-        <div class="area-usuario">
+<header>
+    <h1>Bem-vindo(a), <?= htmlspecialchars($usuario['nome']) ?>!</h1>
+    <div class="area-usuario">
+        <form action="sair.php" method="POST">
+            <button><a href="Home.php">Home</a></button>
+            <button type="submit" class="botao-sair">Sair</button>
+        </form>
+    </div>
+</header>
 
-            <form action="sair.php" method="POST">
-                <button><a href="Home.php">Home</a></button>
-                <button type="submit" class="botao-sair">Sair</button>
-            </form>
-        </div>
-    </header>
+<main>
+    <div class="sidebar">
+        <img src="<?= htmlspecialchars($foto_perfil) ?>" alt="Foto de Perfil"><br>
+        <form id="formFoto" action="upload_foto.php" method="POST" enctype="multipart/form-data">
+            <input type="file" id="arquivo" name="arquivo" accept="image/*" required><br><br>
+            <button type="submit">Atualizar Foto</button>
+        </form>
+        <hr><br>
+        <a href="planejamento_futuro.php">Planejamento do Futuro</a>
+        <a href="resultado_planejamento_futuro.php">Ver Meu Planejamento</a>
+        <a href="plano_acao.php">Plano de Ação</a>
+        <a href="resultado_plano_acao.php">Ver Meu Plano de Ação</a>
+        <a href="quiz_inteligencia.php">Quiz Inteligência</a>
+        <a href="resultado_inteligencias.php">Resultado Quiz Inteligência</a>
+        <a href="quiz_personalidade.php">Quiz Personalidade</a>
+        <a href="resultado_personalidade.php">Resultado Quiz Personalidade</a>
+        <a href="quem_sou.php">Quem Sou</a>
+    </div>
 
-    <main>
-        <div class="sidebar">
-            <img src="<?= htmlspecialchars($foto_perfil) ?>" alt="Foto de Perfil"><br>
+    <div class="content">
+        <h2>Meus Dados - Quem Sou Eu</h2>
 
-            <form id="formFoto" action="upload_foto.php" method="POST" enctype="multipart/form-data">
-                <input type="file" id="arquivo" name="arquivo" accept="image/*" required><br><br>
-                <button type="submit">Atualizar Foto</button>
-            </form>
-
-            <hr><br>
-
-            <a href="planejamento_futuro.php">Planejamento do Futuro</a>
-            <a href="resultado_planejamento_futuro.php">Ver Meu Planejamento</a>
-            <a href="plano_acao.php">Plano de Ação</a>
-            <a href="resultado_plano_acao.php">Ver Meu Plano de Ação</a>
-            <a href="quiz_inteligencia.php">Quiz Inteligência</a>
-            <a href="resultado_inteligencias.php">Resultado Quiz Inteligência</a>
-            <a href="quiz_personalidade.php">Quiz Personalidade</a>
-            <a href="resultado_personalidade.php">Resultado Quiz Personalidade</a>
-            <a href="quem_sou.php">Quem Sou</a>
-        </div>
-
-        <div class="content">
-            <h2>Meus Dados - Quem Sou Eu</h2>
-
-            <?php if ($dados): ?>
-                <table>
-                    <thead>
+        <?php if ($dados): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categorias</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($dados as $campo => $valor): ?>
+                    <?php if (!in_array($campo, ['id', 'user_id', 'created_at', 'updated_at'])): ?>
                         <tr>
-                            <th>Categorias</th>
-                            <th>Descrição</th>
+                            <td><strong><?= ucwords(str_replace('_', ' ', $campo)) ?>:</strong></td>
+                            <td><?= htmlspecialchars($valor) ?></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($dados as $campo => $valor): ?>
-    <?php if ($campo !== 'id' && $campo !== 'user_id'): ?>
-        <tr>
-            <td><strong><?= ucwords(str_replace('_', ' ', $campo)) ?>:</strong></td>
-            <td><?= htmlspecialchars($valor) ?></td>
-        </tr>
-    <?php endif; ?>
-<?php endforeach; ?>
-
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <p>Nenhum dado encontrado.</p>
-            <?php endif; ?>
-        </div>
-    </main>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>Nenhum dado encontrado.</p>
+        <?php endif; ?>
+    </div>
+</main>
 
 </body>
-
 </html>

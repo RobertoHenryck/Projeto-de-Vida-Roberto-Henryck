@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     die("Erro: Usuário não autenticado.");
@@ -59,8 +59,10 @@ foreach ($areas as $area) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../logo para web.png">
     <title>Plano de Ação</title>
     <style>
         body {
@@ -76,7 +78,7 @@ foreach ($areas as $area) {
             background-color: white;
             border-radius: 10px;
             padding: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
@@ -140,54 +142,81 @@ foreach ($areas as $area) {
         .btn-submit:hover {
             background-color: #2980b9;
         }
+
+        .links {
+            display: flex;
+            justify-content: center;
+        }
+
+        .links a {
+
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4A7BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .links a:hover {
+            background-color: #365edc;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Plano de Ação</h1>
+    <div class="container">
+        <h1>Plano de Ação</h1>
 
-    <form method="POST">
-        <?php foreach ($areas as $area): ?>
-            <?php $key = str_replace(' ', '_', strtolower($area)); ?>
-            <div class="area-section">
-                <div class="area-title"><?= htmlspecialchars($area) ?></div>
+        <form method="POST">
+            <?php foreach ($areas as $area): ?>
+                <?php $key = str_replace(' ', '_', strtolower($area)); ?>
+                <div class="area-section">
+                    <div class="area-title"><?= htmlspecialchars($area) ?></div>
 
-                <div class="form-group">
-                    <label for="descricao_<?= $key ?>">O que você quer melhorar?</label>
-                    <input type="text" name="descricao_<?= $key ?>" id="descricao_<?= $key ?>"
-                           value="<?= htmlspecialchars($planos_acao[$key]['descricao'] ?? '') ?>" required>
+                    <div class="form-group">
+                        <label for="descricao_<?= $key ?>">O que você quer melhorar?</label>
+                        <input type="text" name="descricao_<?= $key ?>" id="descricao_<?= $key ?>"
+                            value="<?= htmlspecialchars($planos_acao[$key]['descricao'] ?? '') ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prazo_<?= $key ?>">Prazo para alcançar:</label>
+                        <input type="date" name="prazo_<?= $key ?>" id="prazo_<?= $key ?>"
+                            value="<?= htmlspecialchars($planos_acao[$key]['prazo'] ?? '') ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passo1_<?= $key ?>">Passo 1:</label>
+                        <input type="text" name="passo1_<?= $key ?>" id="passo1_<?= $key ?>"
+                            value="<?= htmlspecialchars($planos_acao[$key]['passo1'] ?? '') ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passo2_<?= $key ?>">Passo 2:</label>
+                        <input type="text" name="passo2_<?= $key ?>" id="passo2_<?= $key ?>"
+                            value="<?= htmlspecialchars($planos_acao[$key]['passo2'] ?? '') ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passo3_<?= $key ?>">Passo 3:</label>
+                        <input type="text" name="passo3_<?= $key ?>" id="passo3_<?= $key ?>"
+                            value="<?= htmlspecialchars($planos_acao[$key]['passo3'] ?? '') ?>">
+                    </div>
                 </div>
+            <?php endforeach; ?>
 
-                <div class="form-group">
-                    <label for="prazo_<?= $key ?>">Prazo para alcançar:</label>
-                    <input type="date" name="prazo_<?= $key ?>" id="prazo_<?= $key ?>"
-                           value="<?= htmlspecialchars($planos_acao[$key]['prazo'] ?? '') ?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="passo1_<?= $key ?>">Passo 1:</label>
-                    <input type="text" name="passo1_<?= $key ?>" id="passo1_<?= $key ?>"
-                           value="<?= htmlspecialchars($planos_acao[$key]['passo1'] ?? '') ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="passo2_<?= $key ?>">Passo 2:</label>
-                    <input type="text" name="passo2_<?= $key ?>" id="passo2_<?= $key ?>"
-                           value="<?= htmlspecialchars($planos_acao[$key]['passo2'] ?? '') ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="passo3_<?= $key ?>">Passo 3:</label>
-                    <input type="text" name="passo3_<?= $key ?>" id="passo3_<?= $key ?>"
-                           value="<?= htmlspecialchars($planos_acao[$key]['passo3'] ?? '') ?>">
-                </div>
-            </div>
-        <?php endforeach; ?>
-
-        <button type="submit" class="btn-submit">Salvar Plano de Ação</button>
-    </form>
-</div>
+            <button type="submit" class="btn-submit">Salvar Plano de Ação</button>
+            <div class="links">
+            <a href="perfil.php">Voltar</a>
+        </div>
+        </form>
+    </div>
 
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\MODEL\model.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\MODEL\model.php';
 
 class Controller
 {
@@ -11,11 +11,13 @@ class Controller
         $this->Model = new Model($pdo);
     }
 
+    // Método para atualizar ou inserir o "sobre mim"
     public function sobre_mim($user_id, $sobre_mim)
     {
         return $this->Model->sobremim($user_id, $sobre_mim);
     }
 
+    // Método para salvar ou atualizar os dados de "Quem Sou Eu"
     public function salvarQuemSou(
         $user_id, $fale_sobre_voce, $minhas_lembrancas, $pontos_fortes, $pontos_fracos, $meus_valores, 
         $minhas_aptidoes, $meus_relacionamentos, $o_que_gosto, $o_que_nao_gosto, $rotina_lazer_estudos, 
@@ -30,7 +32,7 @@ class Controller
         );
     }
 
-    // Método que chama o Model para listar os dados
+    // Método para listar os dados de "Quem Sou Eu"
     public function listarQuemSou($user_id) {
         return $this->Model->listarQuemSou($user_id);
     }

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 
 if (!isset($_SESSION['usuario_id'])) {
@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Projeto de Vida</title>
+    <link rel="icon" type="image/png" href="../logo para web.png">
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -77,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         padding: 20px;
         width: 100%;
         max-width: 600px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     }
 
     h1 {
@@ -105,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         border-radius: 6px;
         resize: vertical;
         background-color: #fafafa;
+   
     }
 
     textarea:focus {
@@ -130,12 +132,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     button:hover {
         background-color: #365edc;
     }
+
+    .links {
+        display: flex;
+        justify-content: center;
+    }
+
+    .links a {
+
+        display: inline-block;
+        margin: 10px;
+        padding: 10px 20px;
+        background-color: #4A7BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .links a:hover {
+        background-color: #365edc;
+    }
+   
 </style>
 
 
 <body>
 
     <form method="POST">
+        <div class="centralizar">
         <h1>Projeto de Vida</h1>
 
         <label>Minhas Aspirações</label>
@@ -170,8 +196,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <label>Visão para os Próximos 10 Anos</label>
         <textarea name="visao_10_anos" required></textarea>
-
+</div>
         <button type="submit">Enviar</button>
+        <div class="links">
+            <a href="perfil.php">Voltar</a>
+        </div>
     </form>
 
 </body>

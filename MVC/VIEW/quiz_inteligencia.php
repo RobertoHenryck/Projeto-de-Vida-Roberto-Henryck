@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     die("Acesso negado. Faça login para continuar.");
@@ -53,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+<link rel="icon" type="image/png" href="../logo para web.png">
 <head>
     <meta charset="UTF-8">
     <title>Teste de Múltiplas Inteligências</title>
@@ -129,6 +130,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 margin: 8px 0;
             }
         }
+        .links {
+            display: flex;
+            justify-content: center;
+        }
+
+        .links a {
+
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4A7BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .links a:hover {
+            background-color: #365edc;
+        }
     </style>
 </head>
 <body>
@@ -171,6 +193,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         ?>
         <button type="submit">Enviar</button>
+        <div class="links">
+            <a href="perfil.php">Voltar</a>
+        </div>
     </form>
 </div>
 

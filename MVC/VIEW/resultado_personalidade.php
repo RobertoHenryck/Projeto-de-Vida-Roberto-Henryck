@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     die("Acesso negado. Faça login para continuar.");
@@ -72,11 +72,7 @@ $valores = json_encode(array_values($pontuacao));
     <title>Resultado do Teste</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<head>
-    <meta charset="UTF-8">
-    <title>Resultado do Teste</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
+<style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f6fa;

@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -120,7 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <?php if (isset($erro)) echo "<p class='erro'>$erro</p>"; ?>
 
-        <a href="login.php">Voltar ao login</a>
+        <a href="index.php">Voltar ao login</a>
+        <link rel="icon" type="image/png" href="../logo para web.png">
     </main>
 </body>
 </html>

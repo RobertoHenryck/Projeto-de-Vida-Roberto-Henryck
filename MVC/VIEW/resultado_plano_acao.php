@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\CONTROLLER\controller.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\MVC\CONTROLLER\controller.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     die("Erro: Usuário não autenticado.");
@@ -28,6 +28,7 @@ foreach ($areas as $area) {
 <head>
     <meta charset="UTF-8">
     <title>Plano de Ação - Listagem</title>
+    <link rel="icon" type="image/png" href="../logo para web.png">
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -137,7 +138,7 @@ foreach ($areas as $area) {
     <p>Visualize e gerencie seus planos de ação de forma clara e organizada.</p>
 
     <div class="actions">
-        <a href="editar_plano_acao.php">Editar Plano de Ação</a>
+  
         <a href="perfil.php">Voltar ao Perfil</a>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if (!isset($_GET['email'])) {
     header("Location: recuperar_senha.php");
@@ -39,24 +39,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Nova Senha</title>
     <link rel="icon" type="image/png" href="../logo para web.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-        }
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: opacity 0.5s ease;
+}
 
         @keyframes fadeIn {
             to {

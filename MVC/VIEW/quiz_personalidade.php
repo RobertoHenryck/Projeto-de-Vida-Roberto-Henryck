@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
@@ -12,10 +12,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Respostas das questões
     $respostas = [
-        $_POST['q1'], $_POST['q2'], $_POST['q3'], $_POST['q4'],
-        $_POST['q5'], $_POST['q6'], $_POST['q7'], $_POST['q8'],
-        $_POST['q9'], $_POST['q10'], $_POST['q11'], $_POST['q12'],
-        $_POST['q13'], $_POST['q14'], $_POST['q15'], $_POST['q16']
+        $_POST['q1'],
+        $_POST['q2'],
+        $_POST['q3'],
+        $_POST['q4'],
+        $_POST['q5'],
+        $_POST['q6'],
+        $_POST['q7'],
+        $_POST['q8'],
+        $_POST['q9'],
+        $_POST['q10'],
+        $_POST['q11'],
+        $_POST['q12'],
+        $_POST['q13'],
+        $_POST['q14'],
+        $_POST['q15'],
+        $_POST['q16']
     ];
 
     // Contagem de respostas para cada tipo
@@ -70,72 +82,95 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../logo para web.png">
     <title>Teste de Personalidade</title>
     <style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #f0f2f5;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
-
-    h2 {
-        text-align: center;
-        margin-top: 30px;
-        color: #2c3e50;
-    }
-
-    form {
-        max-width: 800px;
-        margin: 30px auto;
-        background: #ffffff;
-        padding: 30px 40px;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-
-    p {
-        font-weight: 600;
-        margin: 20px 0 10px;
-    }
-
-    input[type="radio"] {
-        margin-right: 8px;
-        transform: scale(1.2);
-    }
-
-    label {
-        display: block;
-        margin: 5px 0;
-        cursor: pointer;
-    }
-
-    button[type="submit"] {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background-color: #4A7BFF;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        margin-top: 30px;
-        transition: background-color 0.3s ease;
-    }
-
-    button[type="submit"]:hover {
-        background-color: #3A65E0;
-    }
-
-    @media (max-width: 600px) {
-        form {
-            padding: 20px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
-    }
-</style>
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: #2c3e50;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-weight: 600;
+            margin: 20px 0 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+        }
+
+        label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #4A7BFF;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3A65E0;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+        }
+
+        .links a {
+
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4A7BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .links a:hover {
+            background-color: #365edc;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                padding: 20px;
+            }
+        }
+    </style>
 
 
 </head>
@@ -193,6 +228,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         ?>
         <button type="submit">Enviar Respostas</button>
+        <div class="links">
+            <a href="perfil.php">Voltar</a>
+        </div>
     </form>
 
 </body>

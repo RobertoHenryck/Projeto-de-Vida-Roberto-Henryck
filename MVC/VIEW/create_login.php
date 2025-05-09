@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST['nome'];
@@ -122,8 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-size: 14px;
         }
 
-        input[type="submit"],
-        .voltar-btn {
+        input[type="submit"]
+         {
             padding: 10px;
             background-color: #4A7BFF;
             color: white;
@@ -173,6 +173,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             outline: none;
             box-shadow: 0 0 3px #4A7BFF44;
         }
+        a{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            padding: 5px;
+        }
         
     </style>
 </head>
@@ -196,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p><?php echo $erro; ?></p>
             <?php endif; ?>
 
-            <button class="voltar-btn" onclick="window.location.href='index.php'">Voltar para o Login</button>
+           <a href="index.php">Voltar para o Login</a> 
         </div>
     </main>
 </body>

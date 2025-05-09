@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'C:\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
+require_once 'C:\Turma2\xampp\htdocs\Projeto-de-Vida-Roberto-Henryck\config.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     die("Erro: Usuário não autenticado.");
@@ -25,6 +25,7 @@ if (!$testes) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../logo para web.png">
     <title>Resultado do Teste de Inteligências</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
